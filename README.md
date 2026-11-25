@@ -17,13 +17,13 @@ Prioritize robot feedback → failure attribution → code/skill/harness/memory 
 
 Do **not** mistake task-internal retry, standard VLA post-training, generic coding-agent RSI, or world-model/video generation for robot harness RSI.
 
-The 2026-11-10 through 2026-11-25 historical daily files in this initial release are **concise recaps of earlier reports**, not verbatim archival copies or fresh independent verification.
+Historical research reports dated 2026-11-14 through 2026-11-21 and 2026-11-25 have been restored from the accessible original chat reports. Interactive figures are converted to equivalent text or tables; chat-internal citation IDs are not external links. Reports dated 2026-11-10 through 2026-11-13 remain explicitly labeled summary-only because original bodies were unavailable. No new verification of historic research claims is implied.
 
 ## New daily issue workflow
 
-1. Write a new `daily/YYYY-MM-DD.json` report.
+1. Write a new `daily/YYYY-MM-DD.json` report with `body_markdown` containing the complete Chinese report (headings, tables, data, source URLs, conclusions), `archive_status: "full"`, `date`, `title`, `conclusion`, `items`, and `notes`. Do not omit analysis or numerical data.
 2. Prepend the date to `data/daily-index.json`.
-3. Upsert papers by `id`; append version metadata, preserving prior versions.
+3. `data/papers.json` is a manually curated library. Never add new entries automatically. Only append verified new versions to already selected paper IDs; preserve prior versions.
 4. Commit to `main`. GitHub Pages publishes the static site.
 
 The site does not run searches itself. Automatic publication requires the existing ChatGPT scheduled research task with access to the GitHub connector.

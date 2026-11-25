@@ -1,54 +1,67 @@
 [
   {
     "date": "2026-11-25",
-    "summary": "ReWeave；补录 EvoTER"
+    "summary": "ReWeave；补录 EvoTER",
+    "archive_status": "full"
   },
   {
     "date": "2026-11-21",
-    "summary": "A²-VLA"
+    "summary": "A²-VLA",
+    "archive_status": "full"
   },
   {
     "date": "2026-11-20",
-    "summary": "RPSI-Nav"
+    "summary": "RPSI-Nav",
+    "archive_status": "full"
   },
   {
     "date": "2026-11-19",
-    "summary": "AdaRSI v2；InteractVLA"
+    "summary": "AdaRSI v2；InteractVLA",
+    "archive_status": "full"
   },
   {
     "date": "2026-11-18",
-    "summary": "RoboCoEvo"
+    "summary": "RoboCoEvo",
+    "archive_status": "full"
   },
   {
     "date": "2026-11-17",
-    "summary": "ESI"
+    "summary": "ESI",
+    "archive_status": "full"
   },
   {
     "date": "2026-11-16",
-    "summary": "暂无高质量新增"
+    "summary": "暂无高质量新增",
+    "archive_status": "full"
   },
   {
     "date": "2026-11-15",
-    "summary": "暂无高质量新增"
+    "summary": "暂无高质量新增",
+    "archive_status": "full"
   },
   {
     "date": "2026-11-14",
-    "summary": "EmbodiedRSI v2；ACE-CaP-0"
+    "summary": "EmbodiedRSI v2；ACE-CaP-0",
+    "archive_status": "full"
   },
   {
     "date": "2026-11-13",
-    "summary": "GaP 代码发布跟踪"
+    "summary": "GaP 代码发布跟踪",
+    "archive_status": "summary"
   },
   {
     "date": "2026-11-12",
-    "summary": "RoboACE"
+    "summary": "RoboACE",
+    "archive_status": "summary"
   },
   {
     "date": "2026-11-11",
-    "summary": "ReSkill；Flip Anything"
+    "summary": "ReSkill；Flip Anything",
+    "archive_status": "summary"
   },
   {
     "date": "2026-11-10",
-    "summary": "Controlled Study；Flex-RSI"
+    "summary": "Controlled Study；Flex-RSI",
+    "archive_status": "summary"
   }
 ]

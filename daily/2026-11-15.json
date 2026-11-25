@@ -4,7 +4,8 @@
   "conclusion": "周末 arXiv 公告间隔，无新入选。",
   "items": [],
   "notes": [
-    "根据本对话历史简报制作的摘要归档，并非完整原文复刻。",
-    "条目性能数据和机构信息以论文正式版本为准；未核实内容不作强推断。"
-  ]
+    "根据历史原始日报正文迁移；交互图表转换为数据表，原对话内引用标记不具备外部链接，保留已有原文链接。历史结论未重新核验。"
+  ],
+  "body_markdown": "# Robot Harness / Embodied RSI 每日论文简报\n**2026 年 11 月 15 日｜第 29 期｜中文独立简报**\n\n**本期结论：没有发现符合严格 Robot Harness / Embodied RSI 标准的新增论文或实质性开源进展。A/B/C 级新增推荐均为 0。** 本期不重复推送前几期已经介绍的成果，也不混入普通 VLA、World Model 或 Coding Agent RSI 研究。\n\n## 一、arXiv 检索\n检索窗口为新加坡时间 **11 月 13 日 21:55 至 11 月 15 日 09:55**，覆盖最近约 36 小时。\n\n实时核查了 [arXiv cs.RO](https://arxiv.org/list/cs.RO/new) 和 [cs.AI](https://arxiv.org/list/cs.AI/new)。两个分类目前最新的公开公告均为 **2026 年 11 月 13 日（星期五）**，分别包含 164 和 537 条记录，涵盖新投稿、交叉收录及版本更新。该批次已在上一期简报中处理，不属于本期新增公告。\n\n根据 [arXiv 官方发布安排](https://info.arxiv.org/help/availability.html)，美国东部时间星期五和星期六晚间通常不发布新公告。下一批正常公告预计在 **新加坡时间 11 月 16 日星期一上午 09:00**。因此，本期没有新的公开公告可供严格筛选，并非完成了未公开投稿的审查。\n\n筛选结果：A 级 0 篇、B 级 0 篇、C 级 0 篇；未确认需要单独报告的旧论文实质性更新。\n\n## 二、GitHub 开源追踪\n通过 GitHub 仓库提交记录，核查了 RoboACE、GaP Agentic Self-Learning、Graph-as-Policy、VISTA、PyRUA-Lean、RoboArchitect、TinyAstral、SenseNova-RoboRSI、RoboDoctor、Flex-RSI、EmbodiedRSI 项目仓库及 RoboHarness，共 12 个项目。\n\n**最近 36 小时内，未确认这些仓库存在新的默认分支提交。** 其中值得标明的状态如下：\n\n- [RoboACE](https://github.com/DeLin1001/RoboACE)：仓库仍为空，尚不能核实论文所述双 Harness 共进化代码已经发布。\n- [GaP Agentic Self-Learning](https://github.com/graph-robots/agentic-self-learning)：最新提交为 11 月 11 日首次发布的自学习管线，已在前期补记，无新增提交。\n- [TinyAstral](https://github.com/Garfield-kh/TinyAstral)：最新提交为 11 月 9 日，主要调整 README 中的对照结果说明。\n- [PyRUA-Lean](https://github.com/DAGroup-PKU/PyRUA-Lean)：最新提交为 11 月 6 日，涉及 DataFarm 文档。\n- [VISTA](https://github.com/AgenticEI/VISTA)：最新提交为 10 月 28 日，未发现新增评测或 Harness 改进代码。\n\n其余已检查项目也没有核实到本期窗口内的关键代码或模型权重发布。此结论针对已检查的公开仓库及默认分支，不代表所有开发分支均无变化。\n\n## 三、今日研究判断\n本期没有新的外部实验证据需要改变现有 Robot RSI 研究设计。继续坚持以下判定标准：**真实执行失败归因 → 可执行 Harness / Skill / Memory 修改 → 机制实际触发 → Parent–Candidate 配对评测 → 回归检查 → 能力跨轮保留。**\n\n特别需要避免把在线 Episode 内的重复 Recovery、未经验收的 Memory 积累，或单纯提高原始 Benchmark 分数视为已经证明的 Robot RSI 能力提升。\n\n本期无须补充旧论文回顾；新增结果为零的主要原因是 arXiv 周末公告间隔，而不是发现相关方向缺乏研究活动。",
+  "archive_status": "full"
 }

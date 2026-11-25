@@ -4,7 +4,8 @@
   "conclusion": "未核实到满足门槛的论文。",
   "items": [],
   "notes": [
-    "根据本对话历史简报制作的摘要归档，并非完整原文复刻。",
-    "条目性能数据和机构信息以论文正式版本为准；未核实内容不作强推断。"
-  ]
+    "根据历史原始日报正文迁移；交互图表转换为数据表，原对话内引用标记不具备外部链接，保留已有原文链接。历史结论未重新核验。"
+  ],
+  "body_markdown": "# Robot Harness / Embodied RSI 每日论文简报\n**2026 年 11 月 16 日｜第 30 期｜中文独立简报**\n\n**本期未确认符合严格 Robot RSI 标准的高质量新增成果：A/B/C 级推荐均为 0。** 发现一项 TinyAstral 仓库更新，但属于已有论文的 README 说明修订，不涉及新算法、实验结果或代码发布，因此不重复推送。\n\n## arXiv 检索结果\n检索覆盖截至新加坡时间 11 月 16 日上午 10:00 的最近约 36 小时，并核查了 [cs.RO](https://arxiv.org/list/cs.RO/new)、[cs.AI](https://arxiv.org/list/cs.AI/new)、Recent 列表以及相关关键词搜索。\n\n截至核查时，两个分类最新可访问的公告仍为 **2026 年 11 月 13 日**，分别有 164 和 537 条记录。按照 [arXiv 官方公告时间表](https://info.arxiv.org/help/availability.html)，下一批正常公告预计于新加坡时间 11 月 16 日上午 09:00 发布，但此次尚未取得该批次的公开列表。\n\n因此，准确结论是**尚未核实到新论文，而不是已经完整审查 11 月 16 日公告并确认零篇**。此前介绍的 RoboACE、ReSkill、ACE-CaP-0、EmbodiedRSI v2 等均不重复推送。\n\n## GitHub 开源进展\n本次通过 GitHub 提交记录检查了 RoboACE、VISTA、RoboArchitect、PyRUA-Lean、GaP、GaP Agentic Self-Learning、TinyAstral、Flex-RSI、EmbodiedRSI、RoboDoctor、RoboHarness 和 CoEnv，共 12 个项目。\n\n唯一确认发生在最近 36 小时内的提交来自 [TinyAstral](https://github.com/Garfield-kh/TinyAstral/commit/e2c64d95f74fe6bfebf4895a2d8d25f5396a8141)，时间为 **11 月 15 日 18:19（新加坡时间）**。该提交仅修改 README：明确两阶段方法是冻结 Teacher 的 Harness RSI 加学生模型蒸馏，并将六项评测区分为训练基准 RoboTwin-50、Guava、LIBERO-PRO，以及零样本基准 SimplerEnv、VLABench、EB-Manipulation。原有 33.4%→63.6% 和 4B 学生 62.8% 等成绩未变化，没有新增实验。\n\n[RoboACE](https://github.com/DeLin1001/RoboACE) 仓库仍为空；GaP 自学习管线最新提交仍为 11 月 11 日。其余核查项目没有发现本期窗口内新的重要提交。上述判断仅针对已核实的公开仓库记录。\n\n## 今日研究判断\n本期没有新证据改变冻结 VLA、MLLM/VLM Agent 与 Atomic Skills 组成的 Robot Harness RSI 研究方向。依然应以**失败归因、实际 Harness/Skill 修改、机制触发、相同初态配对验证、回归检查和跨轮能力保留**作为真正 RSI 的判定标准。\n\n本期不补充旧论文回顾，也不混入 Coding Agent RSI、普通 VLA 训练或 World Model 研究。需要注意的是，11 月 16 日新公告尚未成功获取，因此本期新论文筛选存在明确的时效性限制。",
+  "archive_status": "full"
 }
