@@ -1,1 +1,323 @@
-[]
+[
+  {
+    "id": "2608.03924",
+    "title": "ETA: A New Agentic Paradigm for Embodied Tasks",
+    "authors": "",
+    "institutions": "",
+    "priority": "C",
+    "category": "相关架构 / 未通过 RSI 晋升",
+    "benchmarks": [
+      "LIBERO",
+      "Real Robot"
+    ],
+    "first_published": "",
+    "url": "https://arxiv.org/abs/2608.03924",
+    "code_url": "https://github.com/OpenMOSS/OpenETA",
+    "code_status": "https://github.com/OpenMOSS/OpenETA",
+    "collected_at": "2026-11-25",
+    "summary": "Agent–Interface–World protocol + general-purpose Planner + modular semantic/control Tools",
+    "versions": [
+      {
+        "version": "原表未记录版本",
+        "date": "",
+        "change": "原表记录：arXiv 2608.03924",
+        "analysis_markdown": "## 原有分类\n\nEmbodied Agent / Agentic Robotics / Auditable Runtime\n\n## 基础架构\n\nAgent–Interface–World protocol + general-purpose Planner + modular semantic/control Tools\n\n## 研究动机\n\n现有 VLA / World Action Model 主要把具身任务压缩为 observation→action 映射，但长时任务还需要可审计的状态维护、显式工具调用、动作后验证，以及对成功/失败经验的受控复用。作者提出 ETA，把通用模型放在 task-level Planner，物理执行交给受 host 管理的 Tools / Interface，并要求每次 world-changing action 后获取 fresh observation，再继续决策。\n\n## 贡献 1\n\n提出 Embodied Task Agent (ETA) / OpenETA：用 Agent–Interface–World 三层协议把通用 Planner 与 perception、grasp/placement、VLA、motion planning、controller 等异构能力统一成 Tool；Interface 负责 schema、permission、provenance、precondition 和 world-mutating gate，Planner 不能直接绕过工具修改世界。\n\n## 贡献 2\n\n建立 auditable evidence chain：把 reasoning decision、ToolResult / action receipt、fresh post-action observation、stage checker 与 trusted environment receipt 分开保存；强调 Tool completion、物理状态变化和 task success 是不同 claim。Pick-and-place 中会单独验证 target selection、attachment、placement / goal relation，最终 success 只接受 host-attested native reward / checker，而不是 Planner 自报完成。\n\n## 贡献 3\n\n提出 constrained self-evolution：从 trusted trajectories 生成 task-local skill、exact-task playbook 或 stage-local delta，但更新必须依次通过 deterministic contract check、isolated review、same-task replay 与 paired held-out evaluation 才能 promotion。当前实验中没有 candidate 通过全部 promotion gates，说明机制目前更像防止无效/回归更新，而不是已经证明可可靠自我提升。\n\n## Pipeline\n\n原表未记录\n\n## Action Interface\n\nStructured Tool calls; one world-changing action → fresh observation → next action; atomic motion/gripper/VLA tools behind host gates\n\n## 实验与评测\n\nFull OpenETA: 44-tool LIBERO evaluation, 400 episodes, 14.0% success; OpenETA for Codex: observe + mark_point + move_to on 130 LIBERO tasks, GPT-5.6 Sol Pass@5 117/130 = 90.0%; limited UR5e real-robot qualitative demos\n\n## 局限\n\n系统在 simulation 中部分依赖 simulator/native checker 的 privileged state 来构造 attachment / goal-relation evidence 与 official reward；这些信息不会进入 Planner context，但 real-world 没有同等 ground truth，需要用 RGB-D、robot/gripper state、几何规则、sensor/checker model 等替代。真实机器人实验目前主要是 UR5e + RealSense 的 interface-level integration / qualitative demonstration，没有正式 real-world success-rate 证据；Full OpenETA 在 LIBERO 也仅 14.0% episode success，timeout 和长时状态管理仍是主要瓶颈。\n\n## 代码\n\nhttps://github.com/OpenMOSS/OpenETA\n\n## 原表发表信息\n\narXiv 2608.03924"
+      }
+    ],
+    "source": "Migrated from existing literature library; no independent re-verification"
+  },
+  {
+    "id": "2607.08448",
+    "title": "Harness VLA: Steering Frozen VLAs into Reliable Manipulation Primitives via Memory-Guided Agents",
+    "authors": "",
+    "institutions": "",
+    "priority": "B",
+    "category": "Frozen VLA baseline / Memory-guided Harness",
+    "benchmarks": [
+      "LIBERO-Pro",
+      "RoboCasa365",
+      "RoboTwin C2R"
+    ],
+    "first_published": "",
+    "url": "https://arxiv.org/abs/2607.08448",
+    "code_url": "https://github.com/RLinf/RPent",
+    "code_status": "https://github.com/RLinf/RPent",
+    "collected_at": "2026-11-25",
+    "summary": "Memory-guided coding agent + fixed analytic primitives + frozen VLA backend (π0.5 / RLDX-1 / LingBot-VLA by benchmark)",
+    "versions": [
+      {
+        "version": "原表未记录版本",
+        "date": "",
+        "change": "原表记录：arXiv 2607.08448",
+        "analysis_markdown": "## 原有分类\n\nAgentic VLA / Harness / Memory-guided Robotics\n\n## 基础架构\n\nMemory-guided coding agent + fixed analytic primitives + frozen VLA backend (π0.5 / RLDX-1 / LingBot-VLA by benchmark)\n\n## 研究动机\n\n端到端 VLA 在局部 contact-rich manipulation 上很强，但在 semantic retargeting、goal re-binding、spatial shift 和长时任务下容易沿用训练轨迹先验；纯 coding-agent + analytic primitive 又难处理不规则抓取、约束放置和 articulated interaction。核心问题是：不再微调 VLA 的前提下，能否通过外层 agent orchestration 扩展 frozen policy 的可用范围。\n\n## 贡献 1\n\n把 frozen VLA 暴露为可重试的 contact-rich primitive（vla_act），并与少量固定 analytic primitives 组合。Planner 负责 semantic re-grounding、pre-contact staging、free-space transport、navigation、release；VLA 主要负责抓取、插入、按钮/龙头/抽屉等难以解析建模的局部接触阶段。\n\n## 贡献 2\n\n引入 task-specific memory 与 global memory：reference seed 的探索成功后保存 audit + primitive recipe；正式 evaluation 只复用 procedure structure，不能复用历史绝对坐标，必须根据 live RGB-D 重新 grounding。Evaluation 中 memory read-only、RESET 禁用。\n\n## 贡献 3\n\n证明同一 frozen VLA 在不改权重时可通过 orchestration 获得显著 OOD 提升；LIBERO-Pro 最强结果 82.4%，RoboTwin C2R 58.4%。关键机制是 semantic re-grounding、VLA retry/restaging 与 analytic non-contact execution，而不是扩张 skill library。\n\n## Pipeline\n\ntask + live obs + memory → coding agent → analytic primitive / vla_act → fresh observation → re-ground / retry → simulator success predicate\n\n## Action Interface\n\nStructured primitive calls: move_to / move_pose / rotate / release / vla_act; one primitive finishes before planner observes again\n\n## 实验与评测\n\nLIBERO + LIBERO-Pro; RoboCasa365; RoboTwin C2R. LIBERO-Pro = 8 suites × 10 tasks × 10 seeds = 800 episodes.\n\n## 局限\n\n高度依赖强 planner 与可靠 RGB-D/segmentation；fixed primitive library 不会主动产生新 skill，也不更新 VLA 权重。Task-specific memory 若用于同一 benchmark 的反复调试会改变 zero-shot 评测含义；论文中的 recovery 主要是 planner 用已有 primitive 重新 staging + retry，并没有独立 recover tool。\n\n## 代码\n\nhttps://github.com/RLinf/RPent\n\n## 原表发表信息\n\narXiv 2607.08448"
+      }
+    ],
+    "source": "Migrated from existing literature library; no independent re-verification"
+  },
+  {
+    "id": "2609.40306",
+    "title": "DynaHarness: A Dynamic Physical Harness for Self-Evolving Robot Agents",
+    "authors": "",
+    "institutions": "",
+    "priority": "A",
+    "category": "Runtime / Harness Evolution",
+    "benchmarks": [
+      "LIBERO-Pro"
+    ],
+    "first_published": "",
+    "url": "https://arxiv.org/abs/2609.40306",
+    "code_url": "https://denghaoyuan123.github.io/Dynaharness_page/",
+    "code_status": "https://denghaoyuan123.github.io/Dynaharness_page/",
+    "collected_at": "2026-11-25",
+    "summary": "Qwen3-VL-4B Slow Brain + deterministic Fast Brain (2 Hz) + Physical Execution Contract + analytic/recovery capabilities + frozen π0.5",
+    "versions": [
+      {
+        "version": "原表未记录版本",
+        "date": "",
+        "change": "原表记录：arXiv 2609.40306",
+        "analysis_markdown": "## 原有分类\n\nDynamic Harness / Runtime Governance / Self-Evolving Robotics\n\n## 基础架构\n\nQwen3-VL-4B Slow Brain + deterministic Fast Brain (2 Hz) + Physical Execution Contract + analytic/recovery capabilities + frozen π0.5\n\n## 研究动机\n\n语义 reasoning 和真实 physical interaction 工作在不同时间尺度：VLM 适合低频复杂规划，但不适合持续监管接触、卡顿、预算和局部恢复；同时 episode-level failure 只告诉系统“失败了”，无法定位究竟应修改 planning、grounding、capability、verification 还是 recovery。\n\n## 贡献 1\n\nSlow Brain 只提出 capability + symbolic arguments，不直接给 pose；Fast Brain 以确定性规则在 2 Hz 做 grounding、precondition/eligibility、budget/lease、progress/stagnation/risk monitoring，并可 refuse、insert recovery、substitute capability、fallback 到 vla_act 或 request replan。Motor execution 仍由 analytic skill / recovery skill / frozen π0.5 完成。\n\n## 贡献 2\n\nPhysical Execution Contract 为每个被接受的 command 绑定 grounded parameters、budget、lease、termination/progress 条件并写入 append-only execution evidence；因此运行时不仅能执行，还能区分 command 无法 grounding、dispatch 失败、skill execution failure、verification failure 等不同故障层。\n\n## 贡献 3\n\n建立 validated self-evolution：ordered failure attribution 将失败定位到最上游匹配层，随后针对 reusable capability / execution mechanism 做 revision，再用 paired regression + broader regression 决定 promotion 或 revert。LIBERO-Pro 冻结系统后在 800 个 newly sampled initial states 上达到 75.2%。\n\n## Pipeline\n\nSlow Brain → symbolic capability → Execution Contract → Fast Brain loop (ground / monitor / recover / substitute) → analytic/recovery/π0.5 → evidence → failure attribution → validated revision\n\n## Action Interface\n\nSlow Brain: capability + symbolic args; Fast Brain grounds to physical parameters and owns execution authority; motor layer = analytic/recovery/VLA\n\n## 实验与评测\n\nLIBERO-Pro development + paired executor ablations; final frozen champion evaluated on 800 newly sampled initial states.\n\n## 局限\n\nFast Brain 主系统本质是手写 deterministic scheduler/state machine，不是 VLM；其可靠性依赖结构化 progress/contact/risk/verifier signal，仿真中这些信号较易获得。Self-evolution 主要改 capability/execution system，π0.5 仍 frozen；论文并未充分证明具体 repair synthesis 全程无人自动完成。\n\n## 代码\n\nhttps://denghaoyuan123.github.io/Dynaharness_page/\n\n## 原表发表信息\n\narXiv 2609.40306"
+      }
+    ],
+    "source": "Migrated from existing literature library; no independent re-verification"
+  },
+  {
+    "id": "2607.00272",
+    "title": "ASPIRE: Agentic /Skills Discovery for Robotics",
+    "authors": "",
+    "institutions": "",
+    "priority": "A",
+    "category": "Executable Skill Discovery",
+    "benchmarks": [
+      "LIBERO-Pro",
+      "Robosuite",
+      "BEHAVIOR-1K"
+    ],
+    "first_published": "",
+    "url": "https://arxiv.org/abs/2607.00272",
+    "code_url": "https://github.com/NVlabs/ASPIRE",
+    "code_status": "https://github.com/NVlabs/ASPIRE",
+    "collected_at": "2026-11-25",
+    "summary": "Coding agent + closed-loop robot execution engine + multimodal traces + continually expanding skill library + evolutionary program search",
+    "versions": [
+      {
+        "version": "原表未记录版本",
+        "date": "",
+        "change": "原表记录：arXiv 2607.00272",
+        "analysis_markdown": "## 原有分类\n\nAgentic Skill Discovery / Continual Robotics / Code-as-Policy\n\n## 基础架构\n\nCoding agent + closed-loop robot execution engine + multimodal traces + continually expanding skill library + evolutionary program search\n\n## 研究动机\n\n传统 robot programming 需要人工组合 perception、planning、control 并逐个调试 failure；固定 skill library 又限制 agent 遇到新任务时的能力上界。ASPIRE 问的是：能否让 coding agent 像软件工程师一样在物理环境里自主写程序、执行、定位 failure、修复，并把经过验证的修复沉淀成可复用 skill。\n\n## 贡献 1\n\n执行引擎对每个 primitive 暴露细粒度 multimodal trace（调用、输入输出、状态、图像、planner/grasp result 等），使 coding agent 能把失败定位到具体 primitive/阶段，再自动合成 code repair 并重新执行，而不是只依据 episode-level success/failure。\n\n## 贡献 2\n\n把成功修复蒸馏为跨任务可检索的 skill memory：保存 failure signature、适用条件、repair strategy / code pattern；因此 learning 的对象不是模型权重，而是不断增长的 sensorimotor skill repository，skill vocabulary 可随经验扩张。\n\n## 贡献 3\n\n使用 evolutionary search 同时维护多个 task/program candidates，避免沿单一路径反复局部打补丁；在 source tasks 上积累 library 后冻结并 zero-shot 到 unseen long-horizon tasks。LIBERO-Pro Long 上报告 31% vs prior 4%，展示跨任务 skill transfer。\n\n## Pipeline\n\ntask → coding agent writes program → execute with multimodal trace → diagnose → repair / branch search → validate → distill reusable skill → growing library → future task retrieval\n\n## Action Interface\n\nPython/code-as-policy programs composed from robot perception/planning/control APIs; skills are executable reusable programs\n\n## 实验与评测\n\nLIBERO-Pro, robosuite bimanual handover, BEHAVIOR-1K; additionally accumulates skills on source tasks and evaluates zero-shot transfer to unseen LIBERO-Pro Long.\n\n## 局限\n\n核心能力仍依赖底层 perception/control APIs 与 coding agent 的程序合成质量；skill accumulation 主要发生在程序/工具层，不等价于 VLA policy-weight improvement。若在公开 benchmark task 上持续 debug，再在同一 task 上报结果，需要严格区分 debug/evolution split 与 held-out evaluation。\n\n## 代码\n\nhttps://github.com/NVlabs/ASPIRE\n\n## 原表发表信息\n\narXiv 2607.00272"
+      }
+    ],
+    "source": "Migrated from existing literature library; no independent re-verification"
+  },
+  {
+    "id": "2606.19980",
+    "title": "ENPIRE: Agentic Robot Policy Self-Improvement in the Real World",
+    "authors": "",
+    "institutions": "",
+    "priority": "B",
+    "category": "Real-world Policy RSI",
+    "benchmarks": [
+      "Real Robot"
+    ],
+    "first_published": "",
+    "url": "https://arxiv.org/abs/2606.19980",
+    "code_url": "https://github.com/NVlabs/ENPIRE",
+    "code_status": "https://github.com/NVlabs/ENPIRE",
+    "collected_at": "2026-11-25",
+    "summary": "Coding-agent autoresearch harness + automatic Environment reset/verification + Policy Improvement + robot Rollout/fleet + Evolution",
+    "versions": [
+      {
+        "version": "原表未记录版本",
+        "date": "",
+        "change": "原表记录：arXiv 2606.19980",
+        "analysis_markdown": "## 原有分类\n\nRobot Autoresearch / Policy Self-Improvement / Real-World RSI\n\n## 基础架构\n\nCoding-agent autoresearch harness + automatic Environment reset/verification + Policy Improvement + robot Rollout/fleet + Evolution\n\n## 研究动机\n\ncoding agents 在软件环境里可以反复 run-test-fix，但真实机器人实验需要人工 reset、验证成功、收集 rollout 和重启训练，导致 policy research loop 无法自动闭合。ENPIRE 把“可重复物理实验”视为自动化机器人研究的关键抽象。\n\n## 贡献 1\n\n提出 EN–PI–R–E 四模块：Environment 自动 reset 和 outcome verification；Policy Improvement 启动 heuristic/Code-as-Policy、BC、offline/online RL 等不同改进路线；Rollout 在单机或 robot fleet 上按预算执行真实 trials；Evolution 由 coding agent 分析 logs/视频/指标并提出下一轮 hypothesis。\n\n## 贡献 2\n\n把 agent 的修改范围提升到训练基础设施和算法代码：不仅能修改 skill script，还能改变数据、reward、sampling、BC/RL recipe、hyperparameter 和实现代码，然后重新训练 policy 并在真实机器人上测量结果。\n\n## 贡献 3\n\n形成 reset → execute → verify → record → refine 的 autonomous research loop，并通过多轮物理实验比较不同 recipe/agent 分支；论文在若干 dexterous real-world tasks 上展示 coding agents 能自主把 policy 推到很高成功率，且 robot fleet 可加速搜索。\n\n## Pipeline\n\nautomatic reset → execute policy → verify/log → coding agent analyzes failures + literature → modify code/data/training → retrain → robot rollout → next research iteration\n\n## Action Interface\n\nAgent edits executable policy/training stack rather than directly emitting every motor action; supports heuristic programs and learned policies\n\n## 实验与评测\n\nReal-world closed-loop policy-improvement experiments with automatic reset/verification; single-robot and robot-fleet rollout budgets.\n\n## 局限\n\n更像 same-task autonomous policy optimization / autoresearch，而不是主要研究 unseen-task zero-shot 泛化；真实物理 trial 成本高，因此评价必须明确 interaction budget、wall-clock 和最终 held-out verification。外层 reset/verification/harness 仍由人预先设计。\n\n## 代码\n\nhttps://github.com/NVlabs/ENPIRE\n\n## 原表发表信息\n\narXiv 2606.19980"
+      }
+    ],
+    "source": "Migrated from existing literature library; no independent re-verification"
+  },
+  {
+    "id": "2609.10522",
+    "title": "Show-Harness: Just a VLM Agent Can Play Robots",
+    "authors": "",
+    "institutions": "",
+    "priority": "C",
+    "category": "Action Interface / 固定 Harness",
+    "benchmarks": [
+      "Cross-task / embodiment"
+    ],
+    "first_published": "",
+    "url": "https://arxiv.org/abs/2609.10522",
+    "code_url": "https://github.com/showlab/Show-Harness",
+    "code_status": "https://github.com/showlab/Show-Harness",
+    "collected_at": "2026-11-25",
+    "summary": "Foundation VLM + discrete Semantic Action Units + deterministic embodiment-specific interpreter; optional small-VLM fine-tuning + GUMI demonstration interface",
+    "versions": [
+      {
+        "version": "原表未记录版本",
+        "date": "",
+        "change": "原表记录：arXiv 2609.10522",
+        "analysis_markdown": "## 原有分类\n\nVLM-native Robot Control / Action Interface / Embodied Harness\n\n## 基础架构\n\nFoundation VLM + discrete Semantic Action Units + deterministic embodiment-specific interpreter; optional small-VLM fine-tuning + GUMI demonstration interface\n\n## 研究动机\n\n直接让 VLM 输出连续关节/EEF action 与其预训练语义空间不匹配；而高层 pick/place skill 又把太多 physical intelligence藏在下游 controller。Show-Harness 重新追问 action abstraction：能否设计一种 VLM 天然容易 reasoning、又足够细粒度控制机器人的中间动作语言。\n\n## 贡献 1\n\n提出 compact Semantic Action Units（如 incremental translation/rotation、GRASP/RELEASE 等），VLM 每一步直接选择语义 motor token；embodiment-specific interpreter 只负责把 token 确定性映射成局部 robot action，因此 fine-grained physical decision 仍由 VLM 负责。\n\n## 贡献 2\n\n同一接口同时支持 closed-source frontier VLM 的 zero-shot robot control，以及小型 open-source VLM 的低成本 fine-tuning；作者强调不需要额外大型 action expert 或昂贵 embodiment-specific pretraining 即可解锁已有 foundation-model knowledge。\n\n## 贡献 3\n\n提出 GUMI，把同一个 semantic action space 用于 GUI demonstration collection，使人类/agent 可以跨 embodiment 以相同动作语言“play”机器人；实验比较 VLA、agentic VLA 和 VLM-native control，并测试跨任务/环境/embodiment 泛化。\n\n## Pipeline\n\nRGB + language → VLM chooses one semantic action unit → deterministic interpreter → local robot motion → fresh observation → VLM chooses next unit\n\n## Action Interface\n\nDiscrete semantic motor tokens → deterministic embodiment interpreter → local continuous robot action\n\n## 实验与评测\n\nZero-shot frontier-VLM control and fine-tuned small-VLM control across tasks, environments and embodiments; GUMI demos share the same action vocabulary.\n\n## 局限\n\n本质上重新引入 discrete/manual action abstraction，复杂 contact-rich manipulation、force-sensitive manipulation、双臂协调等场景能否只靠 semantic action units 扩展仍是关键问题；它的重点是 interface，不是 failure-driven self-evolution。\n\n## 代码\n\nhttps://github.com/showlab/Show-Harness\n\n## 原表发表信息\n\narXiv 2609.10522"
+      }
+    ],
+    "source": "Migrated from existing literature library; no independent re-verification"
+  },
+  {
+    "id": "2610.23128",
+    "title": "SCOPE: Selective Certification of Program Edits for Embodied Heuristic Learning",
+    "authors": "",
+    "institutions": "",
+    "priority": "A",
+    "category": "Program Evolution / Certification",
+    "benchmarks": [
+      "LIBERO-Pro",
+      "Robosuite"
+    ],
+    "first_published": "",
+    "url": "https://arxiv.org/abs/2610.23128",
+    "code_url": "",
+    "code_status": "论文公开代码（见 arXiv）",
+    "collected_at": "2026-11-25",
+    "summary": "Frontier-guided program search + diagnostic graph + stateful API replay + selective behavioral certification",
+    "versions": [
+      {
+        "version": "原表未记录版本",
+        "date": "",
+        "change": "原表记录：arXiv 2610.23128",
+        "analysis_markdown": "## 原有分类\n\nEmbodied RSI / Program Evolution / Regression Certification\n\n## 基础架构\n\nFrontier-guided program search + diagnostic graph + stateful API replay + selective behavioral certification\n\n## 研究动机\n\n具身启发式程序自我改进面临局部修复无法解决结构性失败、广泛重写又可能破坏既有成功行为的问题；重复环境回归测试成本高。\n\n## 贡献 1\n\n将成功和失败执行证据标注到共享诊断图，利用 frontier-guided program search 区分已验证进展与未解决检查，指导后续程序编辑。\n\n## 贡献 2\n\n提出 selective behavioral certification：通过有状态 API replay 恢复历史响应和状态变更，针对选定历史成功轨迹检查候选编辑是否引入回归。\n\n## 贡献 3\n\n结合诊断图、选择性认证反馈与稀疏环境诊断，跨配置连续修复；LIBERO-PRO / Robosuite 平均成功率分别为 80.66% / 84.48%，较最强基线提高 6.51 / 3.48 个百分点。\n\n## Pipeline\n\nfailure/success traces → diagnostic graph → frontier-guided program edits → stateful API replay → selective certification → new rollout / repair\n\n## Action Interface\n\nAgent-generated executable heuristic programs; stateful tool/API calls\n\n## 实验与评测\n\nLIBERO-PRO and Robosuite; selective replay-based regression certification plus environment evaluation\n\n## 局限\n\nReplay certification 仅覆盖被选择的历史行为，不能证明所有未见状态无回归；状态ful API replay 与真实环境动力学之间存在差距，最终仍需真实 rollout 验证。\n\n## 代码\n\n论文公开代码（见 arXiv）\n\n## 原表发表信息\n\narXiv 2610.23128"
+      }
+    ],
+    "source": "Migrated from existing literature library; no independent re-verification"
+  },
+  {
+    "id": "2610.24464",
+    "title": "Learning to Compose: Recursive Self-Improvement of Shared Executable Stacks for Zero-Shot Long-Horizon Robot Manipulation",
+    "authors": "",
+    "institutions": "",
+    "priority": "A",
+    "category": "Shared Executable Stack",
+    "benchmarks": [
+      "LIBERO-Pro Long",
+      "Real Robot"
+    ],
+    "first_published": "",
+    "url": "https://arxiv.org/abs/2610.24464",
+    "code_url": "https://github.com/cocacola-lab/Recursia",
+    "code_status": "https://github.com/cocacola-lab/Recursia",
+    "collected_at": "2026-11-25",
+    "summary": "Recursia：可版本化共享执行栈 S_k=(T_k,K_k,H_k,V_k)；工具、带可观测前置/后置条件及预算的技能、handoff、verifier；固定 foundation model 下由 coding agent 进行单模块程序修复/工具生成、验证门控、冻结迁移。",
+    "versions": [
+      {
+        "version": "原表未记录版本",
+        "date": "",
+        "change": "原表记录：arXiv 2610.24464",
+        "analysis_markdown": "## 原有分类\n\nEmbodied RSI / Robot Harness Self-Improvement / Compositional Transfer / Executable Stack\n\n## 基础架构\n\nRecursia：可版本化共享执行栈 S_k=(T_k,K_k,H_k,V_k)；工具、带可观测前置/后置条件及预算的技能、handoff、verifier；固定 foundation model 下由 coding agent 进行单模块程序修复/工具生成、验证门控、冻结迁移。\n\n## 研究动机\n\n长时任务中单个技能成功不等于组合成功：缺少所需工具、工具返回与实际到位状态不一致、前一技能完成但未满足下一技能前置条件，以及不可靠 verifier 都可能导致失败。相较为每个任务单独修补程序，论文研究如何把修复沉淀进跨任务共享执行接口（§1–2）。\n\n## 贡献 1\n\n定义四层共享 stack：Tool（感知/几何/规划/执行，可生成缺失工具），Skill K_i=(Pre_i,π_i,Post_i,B_i)（可观测前置条件、参数化执行程序、完成证据、资源预算），Handoff（验证下一技能 ready、必要时重新观察/有限恢复），Verifier（对象身份/目标关系；独立于运动到位检查）。合同是可执行检查，不是形式证明（§2.2）。\n\n## 贡献 2\n\nSource-side 首个有证据支持的失败归因→选择一个共享模块槽位→coding agent 提交通用修复或新工具、离线 replay 和测试；proposer 与 verifier/coordinator 分离。单轮候选不能更改未选模块，不能把任务/seed 标识或 simulator ground truth 写入部署代码（§2.3；附录 A）。\n\n## 贡献 3\n\nAcceptance = Generality check ∧ Mechanism tests ∧ paired selection/regression gate；候选与 parent 在预先固定的 source 初始状态/预算上比较，检查净成功增益、逐任务已成功状态损失与运行时完整性；失败保留 parent。最终冻结 stack，通过仅含对象/关系/依赖描述的 declarative target adapter 进行无 target-side code repair 的迁移（§2.4，Alg.1，附录 A–C）。\n\n## Pipeline\n\nLIBERO-90 source rollout → public observation + simulator truth（仅离线诊断）→ earliest supported failure attribution → proposer 单槽修复/新增 tool + replay/tests → evaluator generality/mechanism checks → paired development/selection/regression + 人工轨迹审查 → accept/reject parent → freeze tools/skills/handoffs/verifiers → declarative adapter → LIBERO-Pro Long / FR3 zero-shot target execution。\n\n## Action Interface\n\n工具是可扩展的 perception/geometry/planning/execution Python API；Skill 为 (Pre, program, Post, budget)；handoff 可 reobserve/recover/stop；目标端 data-only adapter 从公开 task_language 生成对象、关系、子目标顺序。具体实现用 public RGB、robot state、VLM + SAM3、Contact-GraspNet；初始/历史物体身份确认与 transport 条件检查；VLM 结构化 JSON 输出（附录 B–C）。\n\n## 实验与评测\n\n源：LIBERO-90，迭代每轮处理 5 个 source samples。主测试：LIBERO-Pro Long，Pos/Task 各 10 tasks×50 seeds=500 episodes；Recursia Pos 28.4%、Task 53.4%，ASPIRE 为 22.6%/38.3%（提升 +5.8/+15.1 pp；Fig.3）；论文也分别给出 N=18 scaling 结果 23.2%/43.4%，不可混同主结果（Fig.7）。真机 Franka FR3+Franka Hand：3 target tasks×10 trials/方法，SD-only 26.7% vs Recursia 66.7%（Table 1），人工判成功。N=13 inference 3 drivers（每轴50 episodes）：rule-based 12/24%、one-shot 16/30%、online 16/32%（Pos/Task）；平均时间 Pos 5.28/6.88/7.22 分，Task 5.20/5.95/7.15 分（Fig.5）。\n\n## 局限\n\n论文明确限制：① source-side 仿真诊断使用 privileged ground truth，但部署不使用；真机 reset 与诊断难复制；② 未测试 cross-embodiment；③ 抓取后端 Contact-GraspNet 与 ASPIRE 对比配置中的 AnyGrasp 不一致，直接 baseline 公平性有限（附录 C.1）；④ 当前 placement verifier enforce=False、corrections=False，仅 shadow monitor，run() 不强制要求每个 placement postcondition 成功（附录 B）；⑤ 部分 inference 对照复用了评测行并存在 Scene5 历史暴露记录，不等于新隔离测试（附录 C.4）；⑥ scaling 为单次 checkpoint 评测且有非单调回退，未给全套跨随机种子置信区间。资料：完整 PDF 24 页，v1。\n\n## 代码\n\nhttps://github.com/cocacola-lab/Recursia\n\n## 原表发表信息\n\narXiv 2610.24464"
+      }
+    ],
+    "source": "Migrated from existing literature library; no independent re-verification"
+  },
+  {
+    "id": "2610.20474",
+    "title": "AdaRSI: On-Demand Recursive Self-Improvement for Embodied Agents",
+    "authors": "",
+    "institutions": "",
+    "priority": "A",
+    "category": "Harness–Policy Co-Evolution",
+    "benchmarks": [
+      "RoboCasa365"
+    ],
+    "first_published": "2026-10-14",
+    "url": "https://arxiv.org/abs/2610.20474",
+    "code_url": "",
+    "code_status": "未找到可确认的官方代码仓库（截至 2026-10-21）；论文提供方法及实验描述，未公开完整 Codex /goal 指令",
+    "collected_at": "2026-11-25",
+    "summary": "GPT-6.1-sol Coding Agent (Codex) + evolvable Harness (Skills/Tools/Procedure) + GR00T N1.5 VLA Policy Library；RoboCasa365 仿真与可恢复状态",
+    "versions": [
+      {
+        "version": "v1",
+        "date": "2026-10-14",
+        "change": "原表记录：arXiv 2610.20474 (2026-10-14, v1)",
+        "analysis_markdown": "## 原有分类\n\nEmbodied RSI / Harness–Policy Co-Evolution / Failure Attribution / On-Demand VLA Fine-tuning\n\n## 基础架构\n\nGPT-6.1-sol Coding Agent (Codex) + evolvable Harness (Skills/Tools/Procedure) + GR00T N1.5 VLA Policy Library；RoboCasa365 仿真与可恢复状态\n\n## 研究动机\n\n既有具身 RSI 要么只修改冻结 VLA 外层的 Harness，无法补足新动作；要么对失败子步骤直接微调，未区分错误调用/站位与底层能力缺口，造成训练浪费和已掌握动作退化。论文追问：何时需要更新 executor 权重？\n\n## 贡献 1\n\n提出 Harness-first、train-on-demand 的联合进化：Coding Agent 先在 development scenes 改进工具、导航/工作位姿、任务拆解、验证与恢复流程；用 held-out validation scenes 检验，再将无法可靠执行的步骤纳入候选训练，而非简单看到失败就更新权重。\n\n## 贡献 2\n\nFailure Attribution 通过 Simulator Snapshot 从失败子步骤重新执行，尝试不同语言指令、工作位姿/接近方式，识别 executor-limited 步骤；该诊断同时决定训练哪个动作以及从何种状态收集示范。成功示范可由原始 VLA rejection sampling 或读取仿真 privileged state 的 coded/scripted expert 生成，不需要人工遥操作。\n\n## 贡献 3\n\n仅对选定子步骤微调 GR00T N1.5 并加入 Policy Library；原始与新 Policy 在相同初始状态/指令/预算下比较，Procedure 按子步骤推荐更优者，不全局替换；保留未采用策略和训练经验，Pilot Tasks 归纳经验文档/预算供后续任务使用。Composite-Unseen 成功率原始 4.6%、Agent+Harness 9.9%、AdaRSI 13.8%；比 Always-train 仅需 28% GPU 时间、22% 示范。\n\n## Pipeline\n\nTask + robot observations → Coding Agent → harness/tool/procedure improvement (frozen π0) → development + held-out validation → snapshot-based counterfactual failure attribution → choose executor-limited sub-steps → self-collected demonstrations (successful VLA rollout / scripted expert) → selective VLA fine-tuning → paired policy comparison → procedure routing / policy library → frozen deployment on unseen scenes；cross-task carryover via experience document + budget\n\n## Action Interface\n\nOnline agent 编排 tool calls、自然语言指令和 bounded VLA manipulation sub-steps；底层 GR00T N1.5 输出连续机器人动作；navigation / reposition / reset 可由 Harness tools 执行；Policy Library 按子步骤选择 π0 或专用 fine-tuned πk。\n\n## 实验与评测\n\nRoboCasa365 50 tasks × 50 held-out test scenes = 2500 task-scene episodes；18 Atomic-Seen、16 Composite-Seen、16 Composite-Unseen。All: GR00T 42.4%、Agent+VLA 41.8%、Harness 46.7%、AdaRSI 48.8%；Composite-Unseen 4.6/5.9/9.9/13.8%。对照 Agent+weights 7.2%、Always-train 12.6%、Lowest-first 11.8% vs AdaRSI 16.6%（非 Pilot 子集）、Fixed Procedure 6.9% vs online AdaRSI 13.8%。Dev/Val/Test scenes 不重叠，但每个目标任务在改进阶段可见。\n\n## 局限\n\n全部实验是 RoboCasa365 仿真；归因、reset/snapshot、成功判定与 scripted expert 依赖 privileged simulator state，迁移真机需要独立检测与自动复位。Composite-Unseen 对预训练 VLA 未见，但 AdaRSI 已针对这些目标任务进行 development/validation/训练，再在新场景测试；并非 source tasks 上进化后冻结系统、对全新 target tasks 零样本直接泛化。Coding Agent 的 /goal 原文及官方代码未核实公开；训练也可能退化已有能力，最终未见组合任务 SR 仍为 13.8%。\n\n## 代码\n\n未找到可确认的官方代码仓库（截至 2026-10-21）；论文提供方法及实验描述，未公开完整 Codex /goal 指令\n\n## 原表发表信息\n\narXiv 2610.20474 (2026-10-14, v1)"
+      }
+    ],
+    "source": "Migrated from existing literature library; no independent re-verification"
+  },
+  {
+    "id": "2610.22362",
+    "title": "CoDA: Co-Evolution of Data Engines and Action Policies",
+    "authors": "",
+    "institutions": "",
+    "priority": "B",
+    "category": "Policy–Data Co-Evolution",
+    "benchmarks": [
+      "LIBERO-Pro"
+    ],
+    "first_published": "2026-10-15",
+    "url": "https://arxiv.org/abs/2610.22362",
+    "code_url": "",
+    "code_status": "项目页 https://plan-lab.github.io/projects/coda/；Code coming soon",
+    "collected_at": "2026-11-25",
+    "summary": "生成式仿真数据引擎 + π0.5 action policy + 视觉语言 critic + heterogeneous shared memory + Text2potential/action-chunk value learning",
+    "versions": [
+      {
+        "version": "v1",
+        "date": "2026-10-15",
+        "change": "原表记录：arXiv 2610.22362 (2026-10-15, v1)",
+        "analysis_markdown": "## 原有分类\n\nRobot Policy–Data Engine Co-Evolution / Active Data Generation / Embodied Self-Improvement\n\n## 基础架构\n\n生成式仿真数据引擎 + π0.5 action policy + 视觉语言 critic + heterogeneous shared memory + Text2potential/action-chunk value learning\n\n## 研究动机\n\n物理有效的自动生成环境不一定针对 policy 的真实失败；随机生成场景与稀疏任务奖励不能有效指导策略提升。\n\n## 贡献 1\n\n统一环境构建、失败诊断和训练进度的异构记忆，记录经过验证的困难和学习状态。\n\n## 贡献 2\n\n把视觉语言 critic 的验证后诊断编译成 environment generation programs 与 policy training programs，让生成场景针对当前失败。\n\n## 贡献 3\n\nText2potential 将诊断转为阶段性 potential，为 action-chunk value learning 提供密集训练信号；使用学习进度反过来选择后续场景和训练程序。\n\n## Pipeline\n\npolicy rollout → VLM critic/validated failure diagnosis → shared memory → targeted generation program + training program/Text2potential → policy update → measured learning progress → refine next generation/training\n\n## Action Interface\n\nπ0.5 连续机器人动作；场景生成程序和分阶段 action-chunk value learning 提供训练反馈。\n\n## 实验与评测\n\n四类操作任务，OOD 成功率 SFT 5.3%→CoDA 27.6%，同生成预算下比最强闭环 baseline +9.5pp；LIBERO-Pro 15轮生成+训练：位置扰动 25%→84%，指令扰动 1%→76%（论文摘要/项目页）。\n\n## 局限\n\n改进对象包含训练数据与 policy 权重，不等同于仅修改冻结 VLA 外部 Robot Harness；依赖生成式仿真和持续训练。摘要与项目页核对，非全文逐节审计。\n\n## 代码\n\n项目页 https://plan-lab.github.io/projects/coda/；Code coming soon\n\n## 原表发表信息\n\narXiv 2610.22362 (2026-10-15, v1)"
+      }
+    ],
+    "source": "Migrated from existing literature library; no independent re-verification"
+  },
+  {
+    "id": "2609.39304",
+    "title": "Scale and Selection: What Makes Automatic Harness Evolution Work for Visual-Interface Robot Agents",
+    "authors": "",
+    "institutions": "",
+    "priority": "A",
+    "category": "Harness Optimization / Candidate Selection",
+    "benchmarks": [
+      "RoboCasa365"
+    ],
+    "first_published": "2026-09-30",
+    "url": "https://arxiv.org/abs/2609.39304",
+    "code_url": "",
+    "code_status": "代码仓库未核实",
+    "collected_at": "2026-11-25",
+    "summary": "Screenshot-based visual-interface robot agent（coding agent 作执行 policy）+ optimizer coding agent 改 harness prompts/tools/control rules + Champion–Challenger",
+    "versions": [
+      {
+        "version": "v4",
+        "date": "2026-10-22",
+        "change": "原表记录：arXiv 2609.39304 (2026-09-30; v4 2026-10-22)",
+        "analysis_markdown": "## 原有分类\n\nRobot Harness RSI / Automatic Harness Optimization / Candidate Selection / Rollout Scaling\n\n## 基础架构\n\nScreenshot-based visual-interface robot agent（coding agent 作执行 policy）+ optimizer coding agent 改 harness prompts/tools/control rules + Champion–Challenger\n\n## 研究动机\n\n自动修改 harness 若仅凭少量 rollout 决策，成功/失败噪声导致过拟合；无条件接受补丁会逐轮累积回退。\n\n## 贡献 1\n\n研究每轮 rollout batch scale 对训练/held-out 泛化与候选晋升稳定性的影响：5→100 rollouts 提高 held-out 成功率。\n\n## 贡献 2\n\nChampion–Challenger：在同一固定评测集比较候选与 incumbent，仅严格更好才晋升，避免自动修订漂移。\n\n## 贡献 3\n\nv4 进一步把 pretrained policy 作为 harness tool 接入，使用 multi-teacher on-policy distillation 将组合执行经验蒸馏回独立 policy，随后继续 harness evolution。\n\n## Pipeline\n\n固定 incumbent harness → optimizer 提议修改 prompts/tools/control rules → 使用批量 rollout 评估训练/held-out → same-case Champion–Challenger gate → accept/reject → （v4）接入 pretrained policy → rollout distillation → stronger policy 上继续 harness evolution\n\n## Action Interface\n\n截图观测 + 指向虚拟目标夹爪的少量工具；optimizer 修改 agent harness，v4 可通过工具委托 pretrained policy。\n\n## 实验与评测\n\n随训练 batch 由5到100 rollouts，held-out 成功率 47%→67%（早期报告）；小数据下训练70%但 held-out54%；Champion–Challenger 在30轮使 held-out 51%→67%；v4：RoboCasa365 独立蒸馏 policy 62.2%（起点+4.8pp），harness+distilled policy 71.2%（官方 leaderboard，论文声称高于此前最优+13.1pp）。\n\n## 局限\n\n这里的基础视觉机器人通过浏览器 3D 界面、screenshots 与虚拟 gripper 操作，并非直接等同真机 VLA 控制；评测集反复用于选择存在 selection-overfitting 风险，需独立 hidden test。v4 数据与最初 v1 摘要不同，已按 v4 记录。\n\n## 代码\n\n代码仓库未核实\n\n## 原表发表信息\n\narXiv 2609.39304 (2026-09-30; v4 2026-10-22)"
+      }
+    ],
+    "source": "Migrated from existing literature library; no independent re-verification"
+  },
+  {
+    "id": "2610.35051",
+    "title": "VISTA: Active Exploration for Self-Improvement in Embodied Agents",
+    "authors": "",
+    "institutions": "",
+    "priority": "A",
+    "category": "Active Exploration / Harness Evolution",
+    "benchmarks": [
+      "LIBERO-Pro",
+      "RoboCasa",
+      "RoboTwin"
+    ],
+    "first_published": "2026-10-26",
+    "url": "https://arxiv.org/abs/2610.35051",
+    "code_url": "",
+    "code_status": "代码仓库未核实",
+    "collected_at": "2026-11-25",
+    "summary": "Meta-agent + versioned Harness Graph + environment active exploration + fresh rollout evaluation",
+    "versions": [
+      {
+        "version": "v1",
+        "date": "2026-10-26",
+        "change": "原表记录：arXiv 2610.35051 (2026-10-26, v1)",
+        "analysis_markdown": "## 原有分类\n\nEmbodied RSI / Active Exploration / Harness Evolution / Research Memory\n\n## 基础架构\n\nMeta-agent + versioned Harness Graph + environment active exploration + fresh rollout evaluation\n\n## 研究动机\n\n静态轨迹反思只能基于历史 logs 给 harness 提议修改，缺少主动进入环境验证失败假说、试验恢复策略并迭代的能力。\n\n## 贡献 1\n\n构建 harness graph 保存版本谱系、历史假说与机制证据，支持复用有效改动和避开反复失败的探索方向。\n\n## 贡献 2\n\nmeta-agent 从保留版本及其执行证据出发，主动生成新 rollout、探测失败与恢复行为，而非只根据静态记录进行修补。\n\n## 贡献 3\n\n依据主动探索结果多轮细化 harness，再进行 fresh evaluation，写回 harness graph，实现 evidence-driven self-improvement。\n\n## Pipeline\n\nretained harness + execution evidence → retrieve harness graph hypotheses/lineage → meta-agent active exploratory rollouts → probe failure/recovery → iterative harness edits → fresh evaluation → append node/evidence to harness graph\n\n## Action Interface\n\n具身 agent 与环境主动交互获取 rollout；具体控制 action/tool API 需正文核实。\n\n## 实验与评测\n\nLIBERO-Pro、RoboCasa、RoboTwin；作者报告成功率逐步提升，相比 static reflection 用更少 simulator rollouts 达到更好的效果；摘要未列精确数字。\n\n## 局限\n\n公开摘要没有给可可靠复核的逐 benchmark 数值、探索预算、选择门槛或实际 tool/schema 细节；需阅读全文再补充，不将“rollout-efficient”误写为特定比例。\n\n## 代码\n\n代码仓库未核实\n\n## 原表发表信息\n\narXiv 2610.35051 (2026-10-26, v1)"
+      }
+    ],
+    "source": "Migrated from existing literature library; no independent re-verification"
+  }
+]
