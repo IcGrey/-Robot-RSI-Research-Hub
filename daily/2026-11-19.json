@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-19",
+  "title": "Robot Harness / Embodied RSI 每日简报",
+  "conclusion": "一篇旧论文实质性更新与一篇新论文。",
+  "items": [
+    {
+      "id": "2610.20474",
+      "priority": "A",
+      "kind": "update",
+      "title": "AdaRSI: On-Demand Recursive Self-Improvement for Embodied Agents",
+      "url": "https://arxiv.org/abs/2610.20474"
+    },
+    {
+      "id": "2611.22584",
+      "priority": "C",
+      "kind": "new",
+      "title": "InteractVLA: Turning VLAs into Interactive Tools for Agentic Robotic Manipulation",
+      "url": "https://arxiv.org/abs/2611.22584"
+    }
+  ],
+  "notes": [
+    "根据本对话历史简报制作的摘要归档，并非完整原文复刻。",
+    "条目性能数据和机构信息以论文正式版本为准；未核实内容不作强推断。"
+  ]
+}

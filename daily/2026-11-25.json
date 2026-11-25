@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-25",
+  "title": "Robot Harness / Embodied RSI 每日简报",
+  "conclusion": "ReWeave 为本期新增重点；EvoTER 是较早发表论文的历史补录。",
+  "items": [
+    {
+      "id": "2611.31053",
+      "priority": "A",
+      "kind": "new",
+      "title": "ReWeave: Emergent Physical Task Topologies for Embodied Harness Optimization and Cross-Task Meta-Distillation",
+      "url": "https://arxiv.org/abs/2611.31053"
+    },
+    {
+      "id": "2611.27797",
+      "priority": "A",
+      "kind": "backfill",
+      "title": "EvoTER: Evolving Embodied Agents via Tool-Use Experience and Reflection",
+      "url": "https://arxiv.org/abs/2611.27797"
+    }
+  ],
+  "notes": [
+    "根据本对话历史简报制作的摘要归档，并非完整原文复刻。",
+    "条目性能数据和机构信息以论文正式版本为准；未核实内容不作强推断。"
+  ]
+}

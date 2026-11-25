@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-21",
+  "title": "Robot Harness / Embodied RSI 每日简报",
+  "conclusion": "无新增 A/B 级完整 Harness RSI，收录一篇 C 级局部技能修订。",
+  "items": [
+    {
+      "id": "2611.25656",
+      "priority": "C",
+      "kind": "new",
+      "title": "A²-VLA: Adapting Vision-Language-Action Policies to New Tools through Agentic Affordance Discovery",
+      "url": "https://arxiv.org/abs/2611.25656"
+    }
+  ],
+  "notes": [
+    "根据本对话历史简报制作的摘要归档，并非完整原文复刻。",
+    "条目性能数据和机构信息以论文正式版本为准；未核实内容不作强推断。"
+  ]
+}

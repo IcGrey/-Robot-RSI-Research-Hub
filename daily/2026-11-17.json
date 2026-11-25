@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-17",
+  "title": "Robot Harness / Embodied RSI 每日简报",
+  "conclusion": "新增 LLM–VLA Flywheel 研究。",
+  "items": [
+    {
+      "id": "2611.18176",
+      "priority": "B",
+      "kind": "new",
+      "title": "ESI: An Embodied Self-Improvement Flywheel for LLM-VLA Agents",
+      "url": "https://arxiv.org/abs/2611.18176"
+    }
+  ],
+  "notes": [
+    "根据本对话历史简报制作的摘要归档，并非完整原文复刻。",
+    "条目性能数据和机构信息以论文正式版本为准；未核实内容不作强推断。"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-18",
+  "title": "Robot Harness / Embodied RSI 每日简报",
+  "conclusion": "新增 Agent–Policy 联合改进相关研究。",
+  "items": [
+    {
+      "id": "2611.19081",
+      "priority": "B",
+      "kind": "new",
+      "title": "RoboCoEvo: Expanding Robot Capabilities through Agent-Policy Co-Evolution",
+      "url": "https://arxiv.org/abs/2611.19081"
+    }
+  ],
+  "notes": [
+    "根据本对话历史简报制作的摘要归档，并非完整原文复刻。",
+    "条目性能数据和机构信息以论文正式版本为准；未核实内容不作强推断。"
+  ]
+}
