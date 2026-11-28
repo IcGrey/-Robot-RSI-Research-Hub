@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-28",
+  "title": "Robot Harness / Embodied RSI 每日简报",
+  "conclusion": "感恩节公告暂停，未发现可核实的新论文或实质更新；历史回顾一篇记忆证据诊断研究。",
+  "items": [
+    {
+      "id": "2611.34915",
+      "title": "Memory Is Not Ground Truth: Revising Navigation Authority under Unreliable VLM Evidence for Persistent Semantic Navigation",
+      "priority": "C",
+      "kind": "backfill",
+      "version": "v1",
+      "url": "https://arxiv.org/abs/2611.34915"
+    }
+  ],
+  "body_markdown": "# Robot Harness / Embodied RSI 每日简报\n\n2026-11-28（新加坡时间）\n\n## 检索范围与结论\n\n检索窗口：11 月 27 日约 03:00 至 11 月 28 日约 15:00（SGT）。检查 [cs.RO 最新公告](https://arxiv.org/list/cs.RO/new)、[cs.RO recent](https://arxiv.org/list/cs.RO/recent)、[cs.AI recent](https://arxiv.org/list/cs.AI/recent) 及相关关键词检索。最新官方列表仍为 11 月 26 日批次。美国感恩节暂停公告，且周五、周六通常不发布；[arXiv 官方发布规则及假期表](https://info.arxiv.org/help/availability.html) 可核实。预计下一批正常公告为新加坡时间 11 月 30 日上午 09:00，实际以官方为准。\n\n本窗口未发现可核实的高质量新论文或实质版本更新；不等于没有新投稿。前两期的 SEEK、SOLVE、Cairn、Skeptic、X-Harness、RoboEvo² 等不重复推送。补充一篇此前未展开的历史研究。未全面审计所有项目仓库提交，因此不宣称全部仓库无更新。\n\n## C1. Memory Is Not Ground Truth: Revising Navigation Authority under Unreliable VLM Evidence for Persistent Semantic Navigation\n\n历史回顾，非今日新增。[原文](https://arxiv.org/html/2611.34915v1)，v1 日期 2026-11-25。作者 Sumukh Shrote、Shenbagaraj Kannapiran、Eric Eaton、Camillo Jose Taylor；宾夕法尼亚大学 GRASP Laboratory。\n\n标签：Persistent Memory / Failure Attribution / Evidence Dependence / Robot Navigation。\n\n核心问题：VLM 多次漏检并不能证明目标已消失。系统区分物体是否存在与历史记忆是否仍有资格指导动作。固定规则按不同观察几何归组负证据，将记忆由活跃降为可疑、休眠，保留记录并允许正证据恢复权限；不把重复漏检当作独立证据。Spot 真机四相机实验结果如下（原文 E1–E4）。\n\n| 指标 | 结果 |\n|---|---:|\n| 人类可见图像中的 VLM 检出 | 42/63 |\n| 蓝椅漏检率 | 66.7% |\n| 红凳漏检率 | 62.5% |\n| 相邻重复观察结果相同 | 36/40 |\n| 目标存在与移除均连续漏检的蓝椅观察点 | 3 |\n| 旧策略选择失效导航目标 | 3/3 |\n| 新策略选择失效导航目标 | 0/3 |\n\n局限：三个配对决策共享历史，远距离行走由操作员执行，未证明端到端成功率提升。固定记忆更新规则不是自主 Harness 修订或独立候选晋升。代码及权重开放状态未确认。归为 C 级机制参考，而非 RSI。\n\n## 排除项与研究判断\n\nHoMe（2611.34624）面向通用 AI 助手记忆，非机器人；普通 VLA 训练和视频生成不收录。历史回顾提示：诊断实验应区分证据数量与独立性，避免把重复观察误当作对失败归因的多次独立确认。没有新增论文或经核实的精选库版本更新，不修改精选库。",
+  "archive_status": "full"
+}
